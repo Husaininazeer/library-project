@@ -1,4 +1,8 @@
 .book {
-    width: 30%;
+    /* width: 30%; */
     border: solid cadetblue 1px;
+}
+
+#popupform {
+    display: none;
 }
