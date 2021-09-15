@@ -11,6 +11,7 @@ function Book(title, author, pageNumbers, readStatus) {
 // making a test books
 const harryPotter = new Book("Harry Potter", "J.K. Rowling", 200, true);
 const gameofThrones = new Book("A Game of thrones", "G. R. Martin", 600, false);
+const theBFG = new Book("The B.F.G", "Roald Dahl", 600, false);
 const aliceInWonderland = new Book(
   "Alice's adventures in wonderland",
   "Lewis Caroll",
@@ -26,6 +27,7 @@ function addBookToLibrary(book) {
 // testing they are appended to array correctly
 addBookToLibrary(aliceInWonderland);
 addBookToLibrary(harryPotter);
+addBookToLibrary(theBFG);
 addBookToLibrary(gameofThrones);
 
 // for every book in the my library array
@@ -51,9 +53,7 @@ myLibrary.forEach((book) => {
     }
   }
 
-  // access the library div
+  // access the library div, append book div as a child
   const libraryDiv = document.querySelector("#libraryDiv");
   libraryDiv.appendChild(bookDiv);
 });
-
-// append attribute div as a child
