@@ -10,16 +10,18 @@
   </head>
   <body>
     <div id="libraryDiv"></div>
+    <button id="openFormButton" onclick="openForm()">Add new book</button>
     <div id="formDiv">
-      <form action="">
-        <label for="title">Book Title</label>
+      <form action="#" target="_self" id="form">
+        <label for="title">Book Title:</label>
         <input type="text" name="title" id="formTitle" />
         <label for="author">Author Name:</label>
         <input type="text" name="author" id="formAuthor" />
-        <label for="pageNumbers">Number of Pages </label>
+        <label for="pageNumbers">Number of Pages:</label>
         <input type="number" id="formPageNumbers" name="pageNumbers" />
-        <label for="readStatus">Book Read?</label>
-        <input type="checkbox" name="readStatus" id="formReadStatus" />
+        <label for="formReadStatus">Book Read?</label>
+        <input type="checkbox" name="formReadStatus" id="formReadStatus" />
+        <button type="submit" id="submit" onclick="formToBook()">Submit</button>
       </form>
     </div>
   </body>
