@@ -9,22 +9,22 @@ function Book(title, author, pageNumbers, readStatus) {
 }
 
 // making a test books
-const harryPotter = new Book("Harry Potter", "J.K. Rowling", 200, true);
-const aliceInWonderland = new Book(
-  "Alice's adventures in wonderland",
-  "Lewis Caroll",
-  240,
-  false
-);
+// const harryPotter = new Book("Harry Potter", "J.K. Rowling", 200, true);
+// const aliceInWonderland = new Book(
+//   "Alice's adventures in wonderland",
+//   "Lewis Caroll",
+//   240,
+//   false
+// );
 
 // adding book to mylibrary array
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 // testing they are appended to array correctly
-addBookToLibrary(aliceInWonderland);
-addBookToLibrary(harryPotter);
-displayLibInDOM();
+// addBookToLibrary(aliceInWonderland);
+// addBookToLibrary(harryPotter);
+// displayLibInDOM();
 
 // function to open form for adding book
 function openForm() {
