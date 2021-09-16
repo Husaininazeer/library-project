@@ -8,66 +8,34 @@ function Book(title, author, pageNumbers, readStatus) {
   this.readStatus = readStatus;
 }
 
-// making a test books
-// const harryPotter = new Book("Harry Potter", "J.K. Rowling", 200, true);
-// const aliceInWonderland = new Book(
-//   "Alice's adventures in wonderland",
-//   "Lewis Caroll",
-//   240,
-//   false
-// );
-
 // adding book to mylibrary array
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
-// testing they are appended to array correctly
-// addBookToLibrary(aliceInWonderland);
-// addBookToLibrary(harryPotter);
-// displayLibInDOM();
 
 // function to open form for adding book
 function openForm() {
   const formDiv = document.querySelector("#formDiv");
-  formDiv.style.display = "block";
-}
-
-function displayLibInDOM() {
-  // for every book in the my library array
-  myLibrary.forEach((book) => {
-    // create a book div
-    const bookDiv = document.createElement("div");
-    bookDiv.classList.add("bookDiv");
-
-    // for every attribute, make a node
-    for (const [attrKey, attr] of Object.entries(book)) {
-      switch (attrKey) {
-        case "title":
-          const bookAttrHeader = document.createElement("h3");
-          bookAttrHeader.textContent = `${attr}`;
-          bookDiv.appendChild(bookAttrHeader);
-          break;
-
-        default:
-          const bookAttr = document.createElement("p");
-          bookAttr.textContent = `${attr}`;
-          bookDiv.appendChild(bookAttr);
-          break;
-      }
-    }
-
-    // access the library div, append book div as a child
-    const libraryDiv = document.querySelector("#libraryDiv");
-    libraryDiv.appendChild(bookDiv);
-  });
+  formDiv.style.visibility = "visible";
 }
 
 function displayLastBookInDOM() {
-  // for every book in the my library array
   // create a book div
   const book = myLibrary[myLibrary.length - 1];
   const bookDiv = document.createElement("div");
   bookDiv.classList.add("bookDiv");
+  const bookContainer = document.createElement("div");
+  bookContainer.classList.add("bookContainer");
+
+  bookContainer.appendChild(bookDiv);
+
+  // removing and entry from the DOM
+  // adding a button for removing
+  const removalButton = document.createElement("button");
+  removalButton.classList.add("removalButton");
+  removalButton.setAttribute("id", "removalButton");
+  removalButton.textContent = "Remove";
+  bookDiv.appendChild(removalButton);
 
   // for every attribute, make a node
   for (const [attrKey, attr] of Object.entries(book)) {
@@ -88,7 +56,7 @@ function displayLastBookInDOM() {
 
   // access the library div, append book div as a child
   const libraryDiv = document.querySelector("#libraryDiv");
-  libraryDiv.appendChild(bookDiv);
+  libraryDiv.appendChild(bookContainer);
 }
 
 // take input from the HTML form, display in DOM and reset form input
