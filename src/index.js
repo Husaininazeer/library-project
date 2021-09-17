@@ -61,8 +61,6 @@ const displayBookContainer = (book, removalButton, bookDiv) => {
 
 const createRemovalButton = (book) => {
   const bookID = myLibrary.indexOf(book);
-  console.log(bookID);
-  // removing and entry from the DOM
   // adding a button for removing
   const removalButton = document.createElement("button");
   removalButton.classList.add("removalButton");
@@ -71,6 +69,7 @@ const createRemovalButton = (book) => {
   removalButton.textContent = "Remove";
   // bookDiv.appendChild(removalButton);
 
+  // removing and entry from the DOM
   removalButton.addEventListener("click", (ev) => {
     console.log("removed book", bookID);
   });
@@ -96,7 +95,11 @@ function formToBook(event) {
   document.querySelector("form").reset();
   addBookToLibrary(newBook);
   console.log(myLibrary);
-  // displayLastBookInDOM();
+  displayBookContainer(
+    newBook,
+    createRemovalButton(newBook),
+    createBookDiv(newBook)
+  );
 }
 
 const submitButton = document.querySelector("#submit");
