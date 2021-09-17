@@ -19,25 +19,13 @@ function openForm() {
   formDiv.style.visibility = "visible";
 }
 
-function displayLastBookInDOM() {
+// function to hold all the content of a book
+const createBookDiv = (book) => {
   // create a book div
-  const book = myLibrary[myLibrary.length - 1];
   const bookDiv = document.createElement("div");
   bookDiv.classList.add("bookDiv");
-  const bookContainer = document.createElement("div");
-  bookContainer.classList.add("bookContainer");
 
-  bookContainer.appendChild(bookDiv);
-
-  // removing and entry from the DOM
-  // adding a button for removing
-  const removalButton = document.createElement("button");
-  removalButton.classList.add("removalButton");
-  removalButton.setAttribute("id", "removalButton");
-  removalButton.textContent = "Remove";
-  bookDiv.appendChild(removalButton);
-
-  // for every attribute, make a node
+  // for book every attribute, make a node
   for (const [attrKey, attr] of Object.entries(book)) {
     switch (attrKey) {
       case "title":
@@ -53,13 +41,46 @@ function displayLastBookInDOM() {
         break;
     }
   }
+  return bookDiv;
+};
 
-  // access the library div, append book div as a child
+// each container contains a bookDiv (with the content) and a removalButton
+const displayBookContainer = (book, removalButton, bookDiv) => {
+  const bookContainer = document.createElement("div");
+  bookContainer.classList.add("bookContainer");
+
+  const bookID = myLibrary.indexOf(book);
+
+  bookContainer.setAttribute("data-bookID", `${bookID}`);
+  bookContainer.appendChild(removalButton);
+  bookContainer.appendChild(bookDiv);
+
   const libraryDiv = document.querySelector("#libraryDiv");
   libraryDiv.appendChild(bookContainer);
-}
+};
 
-// take input from the HTML form, display in DOM and reset form input
+const createRemovalButton = (book) => {
+  const bookID = myLibrary.indexOf(book);
+  console.log(bookID);
+  // removing and entry from the DOM
+  // adding a button for removing
+  const removalButton = document.createElement("button");
+  removalButton.classList.add("removalButton");
+  removalButton.setAttribute("id", "removalButton");
+  removalButton.setAttribute("data-bookID", `${bookID}`);
+  removalButton.textContent = "Remove";
+  // bookDiv.appendChild(removalButton);
+
+  removalButton.addEventListener("click", (ev) => {
+    console.log("removed book", bookID);
+  });
+
+  return removalButton;
+};
+
+console.log(myLibrary);
+
+// // take input from the HTML form, display in DOM and reset form input
 function formToBook(event) {
   const formTitle = document.querySelector("#formTitle").value;
   const formAuthor = document.querySelector("#formAuthor").value;
@@ -75,7 +96,7 @@ function formToBook(event) {
   document.querySelector("form").reset();
   addBookToLibrary(newBook);
   console.log(myLibrary);
-  displayLastBookInDOM();
+  // displayLastBookInDOM();
 }
 
 const submitButton = document.querySelector("#submit");
