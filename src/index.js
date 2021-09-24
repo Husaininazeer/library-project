@@ -1,7 +1,4 @@
 // TODO list:
-// get a toggle working for the read status
-//   use prototypical inheritance
-// get webstorageapi working
 // add styling
 
 let myLibrary = [];
@@ -73,11 +70,6 @@ const displayBookContainer = (book) => {
 
         case "readStatus":
           const bookAttrReadStatus = document.createElement("button");
-          // console.log(attr);
-          // attr == true
-          //   ? bookAttrReadStatus.classList.add("bookRead")
-          //   : bookAttrReadStatus.classList.add("bookUnread");
-
           if (attr == true) {
             bookAttrReadStatus.classList.add("bookRead");
             bookAttrReadStatus.textContent = "Read";
@@ -85,13 +77,11 @@ const displayBookContainer = (book) => {
             bookAttrReadStatus.classList.add("bookUnread");
             bookAttrReadStatus.textContent = "Unread";
           }
-          // bookAttrReadStatus.classList.add("readStatusToggle");
 
           book.prototype = Object.create(Book.prototype);
-          console.log(book.prototype);
 
+          // Read button toggle event listener
           book.readStatusToggle = function () {
-            console.log(book.readStatus);
             book.readStatus
               ? ((book.readStatus = false),
                 (bookAttrReadStatus.textContent = "Unread"),
@@ -99,6 +89,7 @@ const displayBookContainer = (book) => {
               : ((book.readStatus = true),
                 (bookAttrReadStatus.textContent = "Read"),
                 bookAttrReadStatus.classList.add("bookRead"));
+            // console.log(book.readStatus);
           };
 
           bookAttrReadStatus.addEventListener("click", book.readStatusToggle);
@@ -122,32 +113,30 @@ const displayBookContainer = (book) => {
 };
 
 // take input from the HTML form, display in DOM and reset form input
-// function formToBook(event) {
-//   const formTitle = document.querySelector("#formTitle").value;
-//   const formAuthor = document.querySelector("#formAuthor").value;
-//   const formPageNumbers = document.querySelector("#formPageNumbers").value;
-//   const formReadStatus = document.querySelector("#formReadStatus").checked;
-//   const newBook = new Book(
-//     formTitle,
-//     formAuthor,
-//     formPageNumbers,
-//     formReadStatus
-//   );
-//   event.preventDefault();
-//   document.querySelector("form").reset();
-//   addBookToLibrary(newBook);
-//   console.log(myLibrary);
-//   displayBookContainer(newBook);
-// }
+function formToBook(event) {
+  const formTitle = document.querySelector("#formTitle").value;
+  const formAuthor = document.querySelector("#formAuthor").value;
+  const formPageNumbers = document.querySelector("#formPageNumbers").value;
+  const formReadStatus = document.querySelector("#formReadStatus").checked;
+  const newBook = new Book(
+    formTitle,
+    formAuthor,
+    formPageNumbers,
+    formReadStatus
+  );
+  event.preventDefault();
+  document.querySelector("form").reset();
+  addBookToLibrary(newBook);
+  console.log(myLibrary);
+  displayBookContainer(newBook);
+}
 
-// const submitButton = document.querySelector("#submit");
-// submitButton.addEventListener("click", formToBook, false);
-// FIXME what does the false do on the line above
+const submitButton = document.querySelector("#submit");
+submitButton.addEventListener("click", formToBook);
 
 const displayLibrary = (lib) => {
-  lib.forEach((element) => {
-    displayBookContainer(element);
-  });
+  lib.forEach((element) => displayBookContainer(element));
+  console.table(myLibrary);
 };
 
 // adding test books
@@ -155,10 +144,7 @@ myLibrary.push(new Book("Pride and prejudice", "Jane Austen", 553, false));
 myLibrary.push(new Book("Jane Eyre", "Charlotte Bronte", 804, true));
 myLibrary.push(new Book("Wuthering Heights", "Emily Bronte", 934, false));
 
-console.log(myLibrary);
-
-// displayBookContainer(pp);
-// displayBookContainer(je);
-// displayBookContainer(wh);
-
 displayLibrary(myLibrary);
+
+// TODO: get webstorageapi working
+// localstorage
