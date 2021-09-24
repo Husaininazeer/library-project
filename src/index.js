@@ -1,6 +1,4 @@
-// TODO list:
-// add styling
-
+// setting the library array
 if (localStorage.getItem("myLibrary") == null) {
   var myLibrary = [];
   // adding test books
@@ -10,13 +8,6 @@ if (localStorage.getItem("myLibrary") == null) {
 } else {
   var myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
 }
-// localStorage.clear();
-// if (localStorage.getItem("myLibrary") == null) {
-//   console.log("localstorage doesnt exist");
-// } else {
-//   console.log(JSON.parse(localStorage.getItem("myLibrary")));
-//   console.log("localstorage does exist");
-// }
 
 // making the book constructor
 function Book(title, author, pageNumbers, readStatus) {
@@ -36,7 +27,6 @@ function openForm() {
 }
 
 // each container contains a bookDiv (with the content) and a removalButton
-
 const displayBookContainer = (book) => {
   const bookContainer = document.createElement("div");
   bookContainer.classList.add("bookContainer");
@@ -46,7 +36,6 @@ const displayBookContainer = (book) => {
   libraryDiv.appendChild(bookContainer);
 
   // Functions to make content
-
   const createRemovalButton = (book) => {
     const bookID = myLibrary.indexOf(book);
     // adding a button for removing
@@ -59,7 +48,6 @@ const displayBookContainer = (book) => {
     // removing and entry from the DOM
     removalButton.addEventListener("click", (ev) => {
       myLibrary.splice(bookID, 1);
-      // bookContainer.style.visibility = "hidden";
       while (bookContainer.firstChild) {
         bookContainer.removeChild(bookContainer.lastChild);
       }
@@ -93,7 +81,6 @@ const displayBookContainer = (book) => {
             bookAttrReadStatus.classList.add("bookUnread");
             bookAttrReadStatus.textContent = "Unread";
           }
-
           book.prototype = Object.create(Book.prototype);
 
           // Read button toggle event listener
@@ -110,8 +97,8 @@ const displayBookContainer = (book) => {
 
           bookAttrReadStatus.addEventListener("click", book.readStatusToggle);
           bookDiv.appendChild(bookAttrReadStatus);
-
           break;
+
         case "prototype":
           break;
 
@@ -149,15 +136,18 @@ function formToBook(event) {
   displayBookContainer(newBook);
 }
 
+// adding event listener for form submit button
 const submitButton = document.querySelector("#submit");
 submitButton.addEventListener("click", formToBook);
 
+// function to display the whole library
 const displayLibrary = (lib) => {
   lib.forEach((element) => displayBookContainer(element));
   // console.table(myLibrary);
 };
 
 displayLibrary(myLibrary);
+////////////////////////////////////////////////////////////////////////////////
 
 // localstorage
 // function to set myLibrary into localstorage - used in addBookToLibrary

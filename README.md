@@ -1,12 +1,12 @@
-# Library project
-
-(still working on the name..)
+# Shelf
 
 A simple web app that keeps track of the users reading list.
 
 ### Features:
 
 - Lists books on the shelf as cards
+- Keep track of read/unread books
+- Delete unwanted books
 
 ### Tech Used:
 
@@ -14,6 +14,7 @@ A simple web app that keeps track of the users reading list.
 - Vanilla JavaScript
 - Git
 - Vim
+- localstorage
 
 ### Things I have learnt:
 
@@ -24,8 +25,8 @@ A simple web app that keeps track of the users reading list.
 
 ### Future plans:
 
-- Add styling
-- Use WebStorageAPI for persistence
+- [x] Add styling
+- [x] Use WebStorageAPI for persistence
 - Test using Testing framework
 - Deployment
 - Extra features:
