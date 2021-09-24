@@ -11,7 +11,7 @@ function Book(title, author, pageNumbers, readStatus) {
   return { title, author, pageNumbers, readStatus };
 }
 
-// adding book to mylibrary array
+// function for adding book to mylibrary array
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
@@ -23,6 +23,7 @@ function openForm() {
 }
 
 // each container contains a bookDiv (with the content) and a removalButton
+
 const displayBookContainer = (book) => {
   const bookContainer = document.createElement("div");
   bookContainer.classList.add("bookContainer");
@@ -50,7 +51,6 @@ const displayBookContainer = (book) => {
         bookContainer.removeChild(bookContainer.lastChild);
       }
       libraryDiv.removeChild(bookContainer);
-      console.log("removed book", bookID, myLibrary);
     });
 
     return removalButton;
@@ -71,6 +71,45 @@ const displayBookContainer = (book) => {
           bookDiv.appendChild(bookAttrHeader);
           break;
 
+        case "readStatus":
+          const bookAttrReadStatus = document.createElement("button");
+          // console.log(attr);
+          // attr == true
+          //   ? bookAttrReadStatus.classList.add("bookRead")
+          //   : bookAttrReadStatus.classList.add("bookUnread");
+
+          if (attr == true) {
+            bookAttrReadStatus.classList.add("bookRead");
+            bookAttrReadStatus.textContent = "Read";
+          } else if (attr == false) {
+            bookAttrReadStatus.classList.add("bookUnread");
+            bookAttrReadStatus.textContent = "Unread";
+          }
+          // bookAttrReadStatus.classList.add("readStatusToggle");
+
+          book.prototype = Object.create(Book.prototype);
+          console.log(book.prototype);
+
+          book.readStatusToggle = function () {
+            console.log(book.readStatus);
+            book.readStatus
+              ? (book.readStatus = false)
+              : (book.readStatus = true);
+            console.log(book.readStatus);
+          };
+
+          // book.prototype = Object.create(Book.prototype);
+          // // method to toggle readstatus
+          // book.prototype.readStatusToggle = function () {
+          //   // if the class of staus button is read, change it to unread
+          //   console.log(this.readStatus);
+          // };
+
+          bookAttrReadStatus.addEventListener("click", book.readStatusToggle);
+          bookDiv.appendChild(bookAttrReadStatus);
+
+          break;
+
         default:
           const bookAttr = document.createElement("p");
           bookAttr.textContent = `${attr}`;
@@ -86,26 +125,44 @@ const displayBookContainer = (book) => {
   bookContainer.appendChild(createBookDiv(book));
 };
 
+// take input from the HTML form, display in DOM and reset form input
+// function formToBook(event) {
+//   const formTitle = document.querySelector("#formTitle").value;
+//   const formAuthor = document.querySelector("#formAuthor").value;
+//   const formPageNumbers = document.querySelector("#formPageNumbers").value;
+//   const formReadStatus = document.querySelector("#formReadStatus").checked;
+//   const newBook = new Book(
+//     formTitle,
+//     formAuthor,
+//     formPageNumbers,
+//     formReadStatus
+//   );
+//   event.preventDefault();
+//   document.querySelector("form").reset();
+//   addBookToLibrary(newBook);
+//   console.log(myLibrary);
+//   displayBookContainer(newBook);
+// }
+
+// const submitButton = document.querySelector("#submit");
+// submitButton.addEventListener("click", formToBook, false);
+// FIXME what does the false do on the line above
+
+const displayLibrary = (lib) => {
+  lib.forEach((element) => {
+    displayBookContainer(element);
+  });
+};
+
+// adding test books
+myLibrary.push(new Book("Pride and prejudice", "Jane Austen", 553, false));
+myLibrary.push(new Book("Jane Eyre", "Charlotte Bronte", 804, true));
+myLibrary.push(new Book("Wuthering Heights", "Emily Bronte", 934, false));
+
 console.log(myLibrary);
 
-// // take input from the HTML form, display in DOM and reset form input
-function formToBook(event) {
-  const formTitle = document.querySelector("#formTitle").value;
-  const formAuthor = document.querySelector("#formAuthor").value;
-  const formPageNumbers = document.querySelector("#formPageNumbers").value;
-  const formReadStatus = document.querySelector("#formReadStatus").checked;
-  const newBook = new Book(
-    formTitle,
-    formAuthor,
-    formPageNumbers,
-    formReadStatus
-  );
-  event.preventDefault();
-  document.querySelector("form").reset();
-  addBookToLibrary(newBook);
-  console.log(myLibrary);
-  displayBookContainer(newBook);
-}
+// displayBookContainer(pp);
+// displayBookContainer(je);
+// displayBookContainer(wh);
 
-const submitButton = document.querySelector("#submit");
-submitButton.addEventListener("click", formToBook, false);
+displayLibrary(myLibrary);
