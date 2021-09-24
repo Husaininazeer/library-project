@@ -93,17 +93,13 @@ const displayBookContainer = (book) => {
           book.readStatusToggle = function () {
             console.log(book.readStatus);
             book.readStatus
-              ? (book.readStatus = false)
-              : (book.readStatus = true);
-            console.log(book.readStatus);
+              ? ((book.readStatus = false),
+                (bookAttrReadStatus.textContent = "Unread"),
+                bookAttrReadStatus.classList.add("bookUnread"))
+              : ((book.readStatus = true),
+                (bookAttrReadStatus.textContent = "Read"),
+                bookAttrReadStatus.classList.add("bookRead"));
           };
-
-          // book.prototype = Object.create(Book.prototype);
-          // // method to toggle readstatus
-          // book.prototype.readStatusToggle = function () {
-          //   // if the class of staus button is read, change it to unread
-          //   console.log(this.readStatus);
-          // };
 
           bookAttrReadStatus.addEventListener("click", book.readStatusToggle);
           bookDiv.appendChild(bookAttrReadStatus);
