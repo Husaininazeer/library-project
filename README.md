@@ -10,7 +10,7 @@ A simple web app that keeps track of the users reading list.
 
 ### Tech Used:
 
-- HMTL & CSS
+- HTML & CSS
 - Vanilla JavaScript
 - Git
 - Vim
