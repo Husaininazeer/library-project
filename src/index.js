@@ -1,7 +1,22 @@
 // TODO list:
 // add styling
 
-let myLibrary = [];
+if (localStorage.getItem("myLibrary") == null) {
+  var myLibrary = [];
+  // adding test books
+  myLibrary.push(new Book("Pride and prejudice", "Jane Austen", 553, false));
+  myLibrary.push(new Book("Jane Eyre", "Charlotte Bronte", 804, true));
+  myLibrary.push(new Book("Wuthering Heights", "Emily Bronte", 934, false));
+} else {
+  var myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
+}
+// localStorage.clear();
+// if (localStorage.getItem("myLibrary") == null) {
+//   console.log("localstorage doesnt exist");
+// } else {
+//   console.log(JSON.parse(localStorage.getItem("myLibrary")));
+//   console.log("localstorage does exist");
+// }
 
 // making the book constructor
 function Book(title, author, pageNumbers, readStatus) {
@@ -11,6 +26,7 @@ function Book(title, author, pageNumbers, readStatus) {
 // function for adding book to mylibrary array
 function addBookToLibrary(book) {
   myLibrary.push(book);
+  storeLib(myLibrary);
 }
 
 // function to open form for adding book
@@ -96,6 +112,8 @@ const displayBookContainer = (book) => {
           bookDiv.appendChild(bookAttrReadStatus);
 
           break;
+        case "prototype":
+          break;
 
         default:
           const bookAttr = document.createElement("p");
@@ -127,7 +145,7 @@ function formToBook(event) {
   event.preventDefault();
   document.querySelector("form").reset();
   addBookToLibrary(newBook);
-  console.log(myLibrary);
+  // console.log(myLibrary);
   displayBookContainer(newBook);
 }
 
@@ -136,15 +154,19 @@ submitButton.addEventListener("click", formToBook);
 
 const displayLibrary = (lib) => {
   lib.forEach((element) => displayBookContainer(element));
-  console.table(myLibrary);
+  // console.table(myLibrary);
 };
-
-// adding test books
-myLibrary.push(new Book("Pride and prejudice", "Jane Austen", 553, false));
-myLibrary.push(new Book("Jane Eyre", "Charlotte Bronte", 804, true));
-myLibrary.push(new Book("Wuthering Heights", "Emily Bronte", 934, false));
 
 displayLibrary(myLibrary);
 
-// TODO: get webstorageapi working
 // localstorage
+// function to set myLibrary into localstorage - used in addBookToLibrary
+function storeLib(library) {
+  localStorage.setItem("myLibrary", JSON.stringify(library));
+}
+
+// function to retrieve items in the localstorage
+function getLib() {
+  const unparsedLib = localStorage.getItem("myLibrary");
+  console.log(JSON.parse(unparsedLib));
+}
