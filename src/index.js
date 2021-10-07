@@ -2,9 +2,19 @@
 if (localStorage.getItem("myLibrary") == null) {
   var myLibrary = [];
   // adding test books
-  myLibrary.push(new Book("Pride and prejudice", "Jane Austen", 553, false));
-  myLibrary.push(new Book("Jane Eyre", "Charlotte Bronte", 804, true));
-  myLibrary.push(new Book("Wuthering Heights", "Emily Bronte", 934, false));
+
+  // a random int function
+  const randInt = (max) => Math.floor(Math.random() * max);
+  for (let i = 0; i < 20; i++) {
+    myLibrary.push(
+      new Book(
+        `Test Title ${i}`,
+        `Test Author ${i}`,
+        randInt(1000),
+        Math.random() < 0.5
+      )
+    );
+  }
 } else {
   var myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
 }
@@ -20,11 +30,11 @@ function addBookToLibrary(book) {
   storeLib(myLibrary);
 }
 
-// function to open form for adding book
-function openForm() {
-  const formDiv = document.querySelector("#formDiv");
-  formDiv.style.visibility = "visible";
-}
+// // function to open form for adding book
+// function openForm() {
+//   const formDiv = document.querySelector("#formDiv");
+//   formDiv.style.visibility = "visible";
+// }
 
 // each container contains a bookDiv (with the content) and a removalButton
 const displayBookContainer = (book) => {
