@@ -32,3 +32,4 @@ A simple web app that keeps track of the users reading list.
 - Extra features:
   - Reading goal tracking
   - OAuth integration
+- Use React to rebuild the app 
